@@ -9,7 +9,7 @@ mydb = mysql.connector.connect(
 
 cursor=mydb.cursor()
 #######################################################################
-#Creación y llenado de tabla con Datos generales de los participantes
+Creación y llenado de tabla con Datos generales de los participantes
 ######################################################################
 cursor.execute("CREATE TABLE Datos_Generales (Persona_ID INT AUTO_INCREMENT PRIMARY KEY, Nombre VARCHAR(100), Sexo ENUM('M','H'), Edad INT, Estado VARCHAR(20)")
 
@@ -40,7 +40,6 @@ sql= "INSERT INTO Mediciones (Persona_ID,Tipo, Valor, No_Medicion) VALUES (%s, %
 
 for row in data.iterrows():
     values=list(row[1])
-
     Alt=[]
     Alt.append(row[0]+1)
     Alt.append("Altura")
@@ -76,8 +75,9 @@ for row in data.iterrows():
             Med.append("Diastólica")
             Med.append(values[i])
         Med.append(1)
+        cursor.execute(sql,Med)
 mydb.commit()
 
-cursor.execute("SELECT * FROM Mediciones")
-for x in cursor:
-  print(x)
+#cursor.execute("SELECT * FROM Mediciones")
+#for x in cursor:
+#  print(x)
